@@ -9,14 +9,18 @@ require_once "../parsencat.php";
 require_once "../jbdump.php";
 require_once "../fw.joomla.php";
 
-$brand = 1306;
-$brandName = "orby";
-$host = "http://www.orby.ru";
+$brand = 9;
+$brandName = "pelican-style";
+$host = "http://shop.pelican-style.ru";
 
 $pol_ar = array(
 	'Мужская коллекция' => 81,
 	'Женская коллекция' => 80,
 	'Детская коллекция' => 82,
+
+	'Мужчинам' => 81,
+	'Женщинам' => 80,
+	'Детям' => 82,
 );
 
 $polmzhd_ar = array(
@@ -26,7 +30,7 @@ $polmzhd_ar = array(
 );
 
 $vidv = array(
-	'Белье' => 142,
+    // '' => ,
 );
 
 $counter = 0;
@@ -34,12 +38,11 @@ $catalog = json_decode(file_get_contents($brandName . ".json"));
 //foreach ($catalog as $cat => &$items) {
 foreach ($catalog as &$item) {
 	//	foreach ($items as &$item) {
-	$pol = 0;
+	// $pol = 0;
 	$polmzhd = 0;
 
-	// $category = explode(" - ", $item->category);
-	// $pol = $pol_ar[$category[0]];
-	$pol = 0;
+	$category = explode(" - ", $item->category);
+	$pol = $pol_ar[$category[0]];
 
 	$obj = new stdClass;
 	$obj->nc_name = $item->name; // запись имя товара

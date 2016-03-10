@@ -9,9 +9,9 @@ require_once "../parsencat.php";
 require_once "../jbdump.php";
 require_once "../fw.joomla.php";
 
-$brand = 1306;
-$brandName = "orby";
-$host = "http://www.orby.ru";
+$brand = 1290;
+$brandName = "tribuna";
+$host = "http://tribuna.com.ru";
 
 $pol_ar = array(
 	'Мужская коллекция' => 81,
@@ -26,7 +26,15 @@ $polmzhd_ar = array(
 );
 
 $vidv = array(
-	'Белье' => 142,
+    'Классическая коллекция - Бюстгальтер' => 1330,
+    'Классическая коллекция - Трусы' => 1325,
+    'Классическая коллекция - Панталоны' => 175,
+    'Модная коллекция - Бюстгальтер' => 1330,
+    'Модная коллекция - Трусы' => 1325,
+    'Купальники - Купальники слитные' => 1399,
+    'Купальники - Купальники раздельные' => 1400,
+    'Купальники - Блузки-туники' => 1401,
+    'Купальники - Парео' => 1402,
 );
 
 $counter = 0;
@@ -34,12 +42,11 @@ $catalog = json_decode(file_get_contents($brandName . ".json"));
 //foreach ($catalog as $cat => &$items) {
 foreach ($catalog as &$item) {
 	//	foreach ($items as &$item) {
-	$pol = 0;
+	$pol = 80;
 	$polmzhd = 0;
 
 	// $category = explode(" - ", $item->category);
 	// $pol = $pol_ar[$category[0]];
-	$pol = 0;
 
 	$obj = new stdClass;
 	$obj->nc_name = $item->name; // запись имя товара
@@ -47,8 +54,7 @@ foreach ($catalog as &$item) {
 	$obj->nc_pol = $pol; // запись коллекция
 	// $obj->nc_polmzhd = $polmzhd; // запись пол
 	$obj->nc_polmzhd = 0; // запись пол
-	// $obj->nc_vidv = $vidv[$item->category]; // запись вид вещи
-	$obj->nc_vidv = 0; // запись вид вещи
+	$obj->nc_vidv = $vidv[$item->category]; // запись вид вещи
 	$obj->title = $obj->nc_name; // запись тайтл
 	// $obj->nc_description = $item->desc; // запись описания
 	$obj->nc_sku = $item->sku; // запись артикул

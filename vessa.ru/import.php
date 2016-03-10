@@ -9,9 +9,9 @@ require_once "../parsencat.php";
 require_once "../jbdump.php";
 require_once "../fw.joomla.php";
 
-$brand = 1306;
-$brandName = "orby";
-$host = "http://www.orby.ru";
+$brand = 1317;
+$brandName = "vessa";
+$host = "http://www.vessa.ru";
 
 $pol_ar = array(
 	'Мужская коллекция' => 81,
@@ -48,7 +48,7 @@ foreach ($catalog as &$item) {
 	// $obj->nc_polmzhd = $polmzhd; // запись пол
 	$obj->nc_polmzhd = 0; // запись пол
 	// $obj->nc_vidv = $vidv[$item->category]; // запись вид вещи
-	$obj->nc_vidv = 0; // запись вид вещи
+	$obj->nc_vidv = 142; // запись вид вещи
 	$obj->title = $obj->nc_name; // запись тайтл
 	// $obj->nc_description = $item->desc; // запись описания
 	$obj->nc_sku = $item->sku; // запись артикул

@@ -170,7 +170,9 @@ func getCategories() map[string]string {
 						ssCat := sss.Find("a").Text()
 						ssCatLink, _ := sss.Find("a").Attr("href")
 						if !contains(excludeList, ssCat) {
-							fmt.Printf("**\t %s - %s => %s\n", subCat, ssCat, ssCatLink)
+							// fmt.Printf("**\t %s - %s => %s\n", subCat, ssCat, ssCatLink)
+							// fmt.Printf("'%s - %s - %s' => ,\n",cat, subCat, ssCat)
+							fmt.Printf("'%s' => ,\n", ssCat)
 							categories[cat+" - "+subCat+" - "+ssCat] = ssCatLink
 						}
 					})
@@ -269,7 +271,7 @@ func getProducts(doc *goquery.Document, cat string) {
 		})
 		tmpFullDesc := strings.TrimRight(strings.TrimSpace(docProd.Find("div.node-product.product > div.row > div.prod-descr-view > div.prod-text").Text()), ":")
 		if (tmpFullDesc != "") || (tmpFullDesc != "_") {
-			desc["Описание"] = tmpFullDesc
+			desc["Описание"] = strings.Replace(tmpFullDesc, "  ", "", -1)
 		}
 		p.Desc = desc
 

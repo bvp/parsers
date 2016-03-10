@@ -9,14 +9,19 @@ require_once "../parsencat.php";
 require_once "../jbdump.php";
 require_once "../fw.joomla.php";
 
-$brand = 1306;
-$brandName = "orby";
-$host = "http://www.orby.ru";
+$brand = 1295;
+$brandName = "incity";
+$host = "http://www.incity.ru";
 
 $pol_ar = array(
 	'Мужская коллекция' => 81,
 	'Женская коллекция' => 80,
 	'Детская коллекция' => 82,
+
+	'мужское' => 81,
+	'женское' => 80,
+	'девочки' => 82,
+	'мальчики' => 82,
 );
 
 $polmzhd_ar = array(
@@ -26,7 +31,26 @@ $polmzhd_ar = array(
 );
 
 $vidv = array(
-	'Белье' => 142,
+	'Аксессуары' => 1390,
+	'Брюки' => 91,
+	'Блузки' => 122,
+	'Верхняя одежда' => 1391,
+	'Джемперы' => 123,
+	'Джинсы' => 1264,
+	'Домашняя одежда' => 144,
+	'Жакеты и кофты' => 124,
+	'Колготки и чулки' => 1392,
+	'Нижнее белье' => 1393,
+	'Носки' => 1353,
+	'Обувь' => 1397,
+	'Платья' => 126,
+	'Рубашки' => 147,
+	'Спорт и пляж' => 1394,
+	'Туалетная вода' => 1395,
+	'Футболки' => 127,
+	'Шапки и шарфы' => 1396,
+	'Шорты' => 105,
+	'Юбки' => 128,
 );
 
 $counter = 0;
@@ -34,12 +58,12 @@ $catalog = json_decode(file_get_contents($brandName . ".json"));
 //foreach ($catalog as $cat => &$items) {
 foreach ($catalog as &$item) {
 	//	foreach ($items as &$item) {
-	$pol = 0;
+	//$pol = 0;
 	$polmzhd = 0;
 
-	// $category = explode(" - ", $item->category);
-	// $pol = $pol_ar[$category[0]];
-	$pol = 0;
+	$category = explode(" - ", $item->category);
+	$pol = $pol_ar[$category[0]];
+	// $pol = 0;
 
 	$obj = new stdClass;
 	$obj->nc_name = $item->name; // запись имя товара
@@ -47,8 +71,8 @@ foreach ($catalog as &$item) {
 	$obj->nc_pol = $pol; // запись коллекция
 	// $obj->nc_polmzhd = $polmzhd; // запись пол
 	$obj->nc_polmzhd = 0; // запись пол
-	// $obj->nc_vidv = $vidv[$item->category]; // запись вид вещи
-	$obj->nc_vidv = 0; // запись вид вещи
+	$obj->nc_vidv = $vidv[$category[1]]; // запись вид вещи
+	// $obj->nc_vidv = 0; // запись вид вещи
 	$obj->title = $obj->nc_name; // запись тайтл
 	// $obj->nc_description = $item->desc; // запись описания
 	$obj->nc_sku = $item->sku; // запись артикул
