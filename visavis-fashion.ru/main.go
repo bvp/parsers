@@ -184,7 +184,8 @@ func getProductInfo(url string, cat string) { // {{{
 	}
 	p.Name = docp.Find("div.g-title-wrap > h1.g-title").Text()
 	p.Sku = strings.TrimSpace(strings.Replace(tmpSKU, p.Name+" арт.", "", 1))
-	p.Pict, _ = docp.Find("div.catalog_item_detailed.clearfix > div.col_left > div.img_big > a > img#zoomImg").Attr("src")
+	tmpPict, _ := docp.Find("div.catalog_item_detailed.clearfix > div.col_left > div.img_big > a > img#zoomImg").Attr("src")
+	p.Pict = baseURL + tmpPict
 	p.Link = url
 	p.Category = cat
 

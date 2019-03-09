@@ -1,5 +1,5 @@
 /*
-Catalog parser for https://tvoe.ru
+Catalog parser for https://www.incity.ru
 */
 package main
 
@@ -178,7 +178,7 @@ func getCategories() map[string]string {
 	doc.Find("body > div.site_container.js-fix-header > header > div > nav > span").Each(func(i int, s *goquery.Selection) {
 		cat := strings.TrimSpace(s.Find("span > a").Text())
 		if !contains(excludeList, cat) {
-			fmt.Printf("** %s\n", cat)
+			// fmt.Printf("** %s\n", cat)
 			s.Find("div.dropdown > div.dropdown__inner > div.dropdown__menu > div.dropdown__list > div").Each(func(j int, ss *goquery.Selection) {
 				subCatLink, _ := ss.Find("a").Attr("href")
 				subCat := strings.TrimSpace(ss.Find("a > span").Text())
@@ -304,7 +304,8 @@ func getProductInfo(url string, cat string, img string) {
 
 	*/
 
-	p.Category = strings.Split(cat, " - ")[1]
+	// p.Category = strings.Split(cat, " - ")[1]
+	p.Category = cat
 
 	desc := make(map[string]string)
 	doc.Find("div.product__information > div.product__info > div:nth-child(3) > div > div.description__desc > div.description__content > table > tbody > tr").Each(func(i int, dp *goquery.Selection) {

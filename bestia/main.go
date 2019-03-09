@@ -140,7 +140,7 @@ func getCategories() map[string]string {
 						innerCatLink, _ := disSubCat.Find("a").Attr("href")
 
 						if !contains(excludeList, innerCat) {
-							log.Printf("**\t %s => %s", innerCat, innerCatLink)
+							log.Printf("**\t %s => %s\n", innerCat, innerCatLink)
 							categories[cat+" - "+innerCat] = innerCatLink
 							//				log.Printf("** Найдена категория - %s => %s\n", innerCat, innerCatLink)
 
@@ -166,7 +166,7 @@ func getCategories() map[string]string {
 						ssCat := sss.Find("a").Text()
 						ssCatLink, _ := sss.Find("a").Attr("href")
 						if !contains(excludeList, ssCat) {
-							fmt.Printf("**\t %s - %s => %s\n", subCat, ssCat, ssCatLink)
+							fmt.Printf("**\t %s - %s - %s => %s\n", cat, subCat, ssCat, ssCatLink)
 							categories[cat+" - "+subCat+" - "+ssCat] = ssCatLink
 						}
 					})
